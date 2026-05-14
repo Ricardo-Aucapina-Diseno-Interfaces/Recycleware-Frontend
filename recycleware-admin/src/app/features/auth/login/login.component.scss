@@ -1,0 +1,109 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #222629;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+.login-card {
+  background: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h2 {
+    margin: 0;
+    text-align: center;
+    color: #333333;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+
+  .logo {
+    max-width: 120px;
+    height: auto;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-size: 0.9rem;
+    color: #555555;
+    font-weight: 500;
+  }
+
+  input {
+    padding: 0.75rem 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:focus {
+      border-color: #4A90E2;
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    }
+
+    &.is-invalid {
+      border-color: #E74C3C;
+      &:focus {
+        box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.2);
+      }
+    }
+  }
+}
+
+.error-message {
+  color: #E74C3C;
+  font-size: 0.8rem;
+  min-height: 1rem;
+
+  &.main-error {
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
+button {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  background-color: #4A90E2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+
+  &:hover:not(:disabled) {
+    background-color: #357ABD;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    background-color: #A0C4E8;
+    cursor: not-allowed;
+  }
+}

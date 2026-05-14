@@ -1,0 +1,50 @@
+<div class="admin-container">
+  
+  <aside class="sidebar" [class.open]="isMobileMenuOpen">
+    <div class="sidebar-top"></div>
+    <div class="sidebar-center">
+      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+        <i class="bi bi-people"></i>
+        <span class="menu-text">Usuarios</span>
+      </a>
+      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+        <i class="bi bi-card-checklist"></i>
+        <span class="menu-text">Solicitudes</span>
+      </a>
+      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+        <i class="bi bi-box2-heart"></i>
+        <span class="menu-text">Donaciones</span>
+      </a>
+      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+        <i class="bi bi-chat-dots"></i>
+        <span class="menu-text">Comentarios</span>
+      </a>
+    </div>
+    <div class="sidebar-bottom">
+      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+        <i class="bi bi-box-arrow-right"></i>
+        <span class="menu-text">Cerrar Sesión</span>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="topbar">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <button class="mobile-toggle d-md-none" (click)="toggleMobileMenu()">
+          <i class="bi bi-list"></i>
+        </button>
+        <h1>Admin</h1>
+      </div>
+      <img src="/logo-circulo.png" alt="Logo" class="topbar-logo">
+    </header>
+    
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  @if (isMobileMenuOpen) {
+    <div class="sidebar-overlay d-md-none" (click)="toggleMobileMenu()"></div>
+  }
+</div>
