@@ -30,6 +30,16 @@
   }
 }
 
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 15px rgba($primary, 0.05);
+  background-color: $light;
+}
+
 .usuarios-table {
   width: 100%;
   border-collapse: collapse;
@@ -93,5 +103,50 @@
   transition: all 0.2s ease;
   &:hover {
     background-color: rgba($danger, 0.65); 
+  }
+}
+
+.edit-input, .edit-select {
+  background-color: $light;
+  border: 1px solid rgba($primary, 0.3);
+  color: $dark;
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 0.95rem;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+  
+  &:focus {
+    border-color: $secondary;
+    box-shadow: 0 0 0 0.15rem rgba($secondary, 0.2);
+  }
+}
+
+.btn-save {
+  background-color: transparent;
+  color: $success; 
+  border: 0.1rem solid $success;
+  border-radius: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: rgba($success, 0.15); 
+  }
+}
+
+.btn-cancel {
+  background-color: transparent;
+  color: $danger;
+  border: 0.1rem solid $danger;
+  border-radius: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  transition: all 0.2s ease;
+  &:hover {
+    background-color: rgba($danger, 0.15); 
   }
 }

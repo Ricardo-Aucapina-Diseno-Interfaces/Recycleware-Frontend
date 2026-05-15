@@ -9,7 +9,14 @@
         <th>Id</th>
         <th>Nombre</th>
         <th>DNI</th>
+        <th>Correo</th>
+        <th>Teléfono</th>
+        <th>Dirección</th>
+        <th>Localidad</th>
+        <th>Codigo Postal</th>
         <th>Rol</th>
+        <th>Razon Social</th>
+        <th>Contacto</th>
         <th>Estado</th>
         <th>Opciones</th>
       </tr>
@@ -18,14 +25,94 @@
       @for (user of usuarios; track user.id) {
         <tr>
           <td>{{ user.id }}</td>
-          <td>{{ user.nombre }}</td>
+          <td>
+            @if (user.isEditing) {
+              <input type="text" class="edit-input" [(ngModel)]="user.nombre">
+            } @else {
+              {{ user.nombre }}
+            }
+          </td>
           <td>{{ user.dni }}</td>
-          <td>{{ user.rol }}</td>
-          <td>{{ user.estado }}</td>
+          <td>
+            @if (user.isEditing) {
+              <input type="email" class="edit-input" [(ngModel)]="user.correo">
+            } @else {
+              {{ user.correo }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+              <input type="text" class="edit-input" [(ngModel)]="user.telefono" style="width: 7rem;">
+            } @else {
+              {{ user.telefono }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+              <input type="text" class="edit-input" [(ngModel)]="user.direccion" style="min-width: 10rem;">
+            } @else {
+              {{ user.direccion }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+              <input type="text" class="edit-input" [(ngModel)]="user.localidad" style="width: 8rem;">
+            } @else {
+              {{ user.localidad }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+              <input type="text" class="edit-input" [(ngModel)]="user.codigoPostal" style="width: 5rem;">
+            } @else {
+              {{ user.codigoPostal }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+              <select class="edit-select" [(ngModel)]="user.rol">
+                <option value="ADMIN">ADMIN</option>
+                <option value="PARTICULAR">PARTICULAR</option>
+                <option value="EMPRESA">EMPRESA</option>
+              </select>
+            } @else {
+              {{ user.rol }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing && user.rol === 'EMPRESA') {
+              <input type="text" class="edit-input" [(ngModel)]="user.razonSocial" placeholder="Razón Social">
+            } @else {
+              {{ user.rol === 'EMPRESA' ? (user.razonSocial || 'No asignada') : '-' }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+              <input type="text" class="edit-input" [(ngModel)]="user.nombreContacto">
+            } @else {
+              {{ user.nombreContacto }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+              <select class="edit-select" [(ngModel)]="user.estado">
+                <option value="ACTIVO">Activo</option>
+                <option value="PENDIENTE">Pendiente</option>
+                <option value="INACTIVO">Inactivo</option>
+              </select>
+            } @else {
+              {{ user.estado }}
+            }
+          </td>
           <td>
             <div class="options-cell">
-              <button class="btn-edit" title="Editar"><i class="bi bi-pencil"></i></button>
-              <button class="btn-delete" title="Borrar" (click)="eliminarUsuario(user.id)"><i class="bi bi-trash"></i></button>
+              @if (user.isEditing) {
+                <button class="btn-save" title="Guardar" (click)="guardarUsuario(user)"><i class="bi bi-check-lg"></i></button>
+                <button class="btn-cancel" title="Cancelar" (click)="cancelarEdicion(user)"><i class="bi bi-x-lg"></i></button>
+              } @else {
+                <button class="btn-edit" title="Editar" (click)="editarUsuario(user)"><i class="bi bi-pencil"></i></button>
+                <button class="btn-delete" title="Borrar" (click)="eliminarUsuario(user)"><i class="bi bi-trash"></i></button>
+              }
             </div>
           </td>
         </tr>

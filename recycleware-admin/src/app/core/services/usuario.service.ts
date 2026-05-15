@@ -17,4 +17,8 @@ export class UsuarioService {
   deleteUsuario(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`, { withCredentials: true });
   }
+
+  actualizarUsuario(id: number, usuario: any): Observable<any> {   
+    return this.http.patch(`${this.apiUrl}/${id}`, usuario, { withCredentials: true });
+  }
 }
