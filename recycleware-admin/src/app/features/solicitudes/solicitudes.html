@@ -1,0 +1,65 @@
+<div class="usuarios-wrapper">
+  <div class="usuarios-header">
+    <h2>Gestión de Solicitudes</h2>
+  </div>
+
+  <div class="table-responsive">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>ID Solicitante</th>
+          <th>ID Producto</th>
+          <th>Motivo</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (solicitud of solicitudes; track solicitud.id) {
+        <tr>
+          <td>{{ solicitud.id }}</td>
+          <td>{{ solicitud.id_solicitante }}</td>
+          <td>{{ solicitud.id_producto }}</td>
+          <td>
+            @if (solicitud.isEditing) {
+              <input type="text" class="edit-input input-dir" [(ngModel)]="solicitud.motivo" maxlength="255">
+            } @else {
+              {{ solicitud.motivo }}
+            }
+          </td>
+          <td>{{ solicitud.fecha_solicitud | date:'dd/MM/yyyy' }}</td>
+          <td>
+            @if (solicitud.isEditing) {
+              <select class="edit-select" [(ngModel)]="solicitud.id_estado">
+                <option value="1">Pendiente</option>
+                <option value="2">En Revisión</option>
+                <option value="3">Aprobada</option>
+                <option value="4">Denegada</option>
+                <option value="5">Entregada</option>
+              </select>
+            } @else {
+              {{ solicitud.estadoNombre }} }
+          </td>
+          <td>
+            <div class="options-cell">
+              @if (solicitud.isEditing) {
+                <button class="btn-save" title="Guardar" (click)="guardarSolicitud(solicitud)"><i class="bi bi-check-lg"></i></button>
+                <button class="btn-cancel" title="Cancelar" (click)="cancelarEdicion(solicitud)"><i class="bi bi-x-lg"></i></button>
+              } @else {
+                <button class="btn-edit" title="Editar" (click)="editarSolicitud(solicitud)"><i class="bi bi-pencil"></i></button>
+                <button class="btn-delete" title="Borrar" (click)="eliminarSolicitud(solicitud)"><i class="bi bi-trash"></i></button>
+              }
+            </div>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="7" class="empty-row">No hay solicitudes registradas.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

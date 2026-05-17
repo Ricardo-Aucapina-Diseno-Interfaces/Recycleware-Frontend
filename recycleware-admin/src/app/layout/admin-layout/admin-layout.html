@@ -3,25 +3,25 @@
   <aside class="sidebar" [class.open]="isMobileMenuOpen">
     <div class="sidebar-top"></div>
     <div class="sidebar-center">
-      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+      <a href="/admin/usuarios" class="sidebar-link" (click)="toggleMobileMenu()">
         <i class="bi bi-people"></i>
         <span class="menu-text">Usuarios</span>
       </a>
-      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+      <a href="/admin/solicitudes" class="sidebar-link" (click)="toggleMobileMenu()">
         <i class="bi bi-card-checklist"></i>
         <span class="menu-text">Solicitudes</span>
       </a>
-      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+      <a href="/admin/donaciones" class="sidebar-link" (click)="toggleMobileMenu()">
         <i class="bi bi-box2-heart"></i>
         <span class="menu-text">Donaciones</span>
       </a>
-      <a href="#" class="sidebar-link" (click)="toggleMobileMenu()">
+      <a href="/admin/comentarios" class="sidebar-link" (click)="toggleMobileMenu()">
         <i class="bi bi-chat-dots"></i>
         <span class="menu-text">Comentarios</span>
       </a>
     </div>
     <div class="sidebar-bottom">
-      <a href="#" class="sidebar-link" (click)="cerrarSesion($event)">
+      <a href="/login" class="sidebar-link" (click)="cerrarSesion($event)">
         <i class="bi bi-box-arrow-right"></i>
         <span class="menu-text">Cerrar Sesión</span>
       </a>

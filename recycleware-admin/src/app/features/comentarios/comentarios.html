@@ -1,0 +1,77 @@
+<div class="usuarios-wrapper">
+  <div class="usuarios-header">
+    <h2>Gestión de Comentarios</h2>
+  </div>
+
+  <div class="table-responsive">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Autor</th>
+          <th>Rol</th>
+          <th>Comentario</th>
+          <th>Estrellas</th>
+          <th>Activa (Visible)</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (comentario of comentarios; track comentario.id) {
+        <tr>
+          <td>{{ comentario.id }}</td>
+          <td>{{ comentario.autor }}</td>
+          <td>{{ comentario.rol }}</td>
+          <td>
+            @if (comentario.isEditing) {
+              <input type="text" class="edit-input input-dir" [(ngModel)]="comentario.texto" maxlength="255">
+            } @else {
+              {{ comentario.texto }}
+            }
+          </td>
+          <td>
+            @if (comentario.isEditing) {
+              <select class="edit-select input-cp" [(ngModel)]="comentario.estrellas">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            } @else {
+              {{ comentario.estrellas }} ⭐
+            }
+          </td>
+          <td>
+            @if (comentario.isEditing) {
+              <select class="edit-select" [(ngModel)]="comentario.activa">
+                <option [ngValue]="true">Sí</option>
+                <option [ngValue]="false">No</option>
+              </select>
+            } @else {
+              <span [class.text-success]="comentario.activa" [class.text-danger]="!comentario.activa">
+                {{ comentario.activa ? 'Visible' : 'Oculta' }}
+              </span>
+            }
+          </td>
+          <td>
+            <div class="options-cell">
+              @if (comentario.isEditing) {
+                <button class="btn-save" title="Guardar" (click)="guardarComentario(comentario)"><i class="bi bi-check-lg"></i></button>
+                <button class="btn-cancel" title="Cancelar" (click)="cancelarEdicion(comentario)"><i class="bi bi-x-lg"></i></button>
+              } @else {
+                <button class="btn-edit" title="Editar" (click)="editarComentario(comentario)"><i class="bi bi-pencil"></i></button>
+                <button class="btn-delete" title="Borrar" (click)="eliminarComentario(comentario)"><i class="bi bi-trash"></i></button>
+              }
+            </div>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td colspan="7" class="empty-row">No hay comentarios registrados.</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

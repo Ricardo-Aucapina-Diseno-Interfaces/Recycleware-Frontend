@@ -11,6 +11,9 @@ export const routes: Routes = [
     loadComponent: () => import('./layout/admin-layout/admin-layout').then(m => m.AdminLayoutComponent),
     children: [
       { path: 'usuarios', loadComponent: () => import('./features/usuarios/usuarios').then(m => m.UsuariosComponent) },
+      { path: 'solicitudes', loadComponent: () => import('./features/solicitudes/solicitudes').then(m => m.SolicitudesComponent) },
+      { path: 'donaciones', loadComponent: () => import('./features/donaciones/donaciones').then(m => m.DonacionesComponent) },
+      { path: 'comentarios', loadComponent: () => import('./features/comentarios/comentarios').then(m => m.ComentariosComponent) },
       { path: '', redirectTo: 'usuarios', pathMatch: 'full' }
     ]
   },
