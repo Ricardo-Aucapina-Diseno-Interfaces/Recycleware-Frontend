@@ -30,10 +30,18 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
       this.authService.login(email, password).subscribe({
-        next: (res) => {
-          this.router.navigate(['/admin/usuarios']);
+        next: (res: any) => {
+          const rol = res.usuario.rol;
+          
+          localStorage.setItem('userRole', rol);
+          
+          if (rol === 'ADMIN') {
+            this.router.navigate(['/admin/usuarios']);
+          } else {
+            this.router.navigate(['/usuario']);
+          }
         },
-        error: (err) => {
+        error: () => {
           this.errorMessage = 'Login fallido. Por favor, verifica tus credenciales.';
         }
       });
