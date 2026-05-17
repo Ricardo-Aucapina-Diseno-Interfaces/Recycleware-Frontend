@@ -1,126 +1,155 @@
 <div class="usuarios-wrapper">
   <div class="usuarios-header">
     <h2>Gestión de Usuarios</h2>
-    <button class="btn-create">Crear Usuario</button>
+    <button class="btn-create" (click)="crearNuevoUsuario()">Crear Usuario</button>
   </div>
-  <table class="usuarios-table">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Nombre</th>
-        <th>DNI</th>
-        <th>Correo</th>
-        <th>Teléfono</th>
-        <th>Dirección</th>
-        <th>Localidad</th>
-        <th>Codigo Postal</th>
-        <th>Rol</th>
-        <th>Razon Social</th>
-        <th>Contacto</th>
-        <th>Estado</th>
-        <th>Opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (user of usuarios; track user.id) {
+
+  <div class="table-responsive">
+    <table class="usuarios-table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>DNI</th>
+          <th>Correo</th>
+          <th>Contraseña</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>Localidad</th>
+          <th>Codigo Postal</th>
+          <th>Rol</th>
+          <th>Razon Social</th>
+          <th>Contacto</th>
+          <th>Estado</th>
+          <th>Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of usuarios; track user.id) {
         <tr>
           <td>{{ user.id }}</td>
           <td>
             @if (user.isEditing) {
-              <input type="text" class="edit-input" [(ngModel)]="user.nombre">
+            <input type="text" class="edit-input" [ngModel]="user.nombre"
+              (ngModelChange)="user.nombre = sanitizeLetras($event)" maxlength="80">
             } @else {
-              {{ user.nombre }}
-            }
-          </td>
-          <td>{{ user.dni }}</td>
-          <td>
-            @if (user.isEditing) {
-              <input type="email" class="edit-input" [(ngModel)]="user.correo">
-            } @else {
-              {{ user.correo }}
+            {{ user.nombre }}
             }
           </td>
           <td>
-            @if (user.isEditing) {
-              <input type="text" class="edit-input" [(ngModel)]="user.telefono" style="width: 7rem;">
+            @if (user.isNew) {
+            <input type="text" class="edit-input input-dni" [(ngModel)]="user.dni" maxlength="9"
+              placeholder="12345678X">
             } @else {
-              {{ user.telefono }}
+            {{ user.dni }}
             }
           </td>
           <td>
             @if (user.isEditing) {
-              <input type="text" class="edit-input" [(ngModel)]="user.direccion" style="min-width: 10rem;">
+            <input type="email" class="edit-input" [(ngModel)]="user.correo" maxlength="80">
             } @else {
-              {{ user.direccion }}
+            {{ user.correo }}
+            }
+          </td>
+          <td>
+            @if (user.isNew) {
+            <input type="password" class="edit-input input-pwd" [(ngModel)]="user.password" placeholder="••••••••">
+            } @else {
+            <span class="pwd-mask">••••••••</span>
             }
           </td>
           <td>
             @if (user.isEditing) {
-              <input type="text" class="edit-input" [(ngModel)]="user.localidad" style="width: 8rem;">
+            <input type="tel" class="edit-input input-tel" [ngModel]="user.telefono"
+              (ngModelChange)="user.telefono = sanitizeNumeros($event)" minlength="9" maxlength="9">
             } @else {
-              {{ user.localidad }}
+            {{ user.telefono }}
             }
           </td>
           <td>
             @if (user.isEditing) {
-              <input type="text" class="edit-input" [(ngModel)]="user.codigoPostal" style="width: 5rem;">
+            <input type="text" class="edit-input input-dir" [(ngModel)]="user.direccion" maxlength="80">
             } @else {
-              {{ user.codigoPostal }}
+            {{ user.direccion }}
             }
           </td>
           <td>
             @if (user.isEditing) {
-              <select class="edit-select" [(ngModel)]="user.rol">
-                <option value="ADMIN">ADMIN</option>
-                <option value="PARTICULAR">PARTICULAR</option>
-                <option value="EMPRESA">EMPRESA</option>
-              </select>
+            <input type="text" class="edit-input input-loc" [ngModel]="user.localidad"
+              (ngModelChange)="user.localidad = sanitizeLetras($event)" maxlength="80">
             } @else {
-              {{ user.rol }}
+            {{ user.localidad }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+            <input type="text" class="edit-input input-cp" [ngModel]="user.codigoPostal"
+              (ngModelChange)="user.codigoPostal = sanitizeNumeros($event)" minlength="5" maxlength="5">
+            } @else {
+            {{ user.codigoPostal }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing) {
+            <select class="edit-select" [(ngModel)]="user.rol">
+              <option value="ADMIN">ADMIN</option>
+              <option value="PARTICULAR">PARTICULAR</option>
+              <option value="EMPRESA">EMPRESA</option>
+            </select>
+            } @else {
+            {{ user.rol }}
             }
           </td>
           <td>
             @if (user.isEditing && user.rol === 'EMPRESA') {
-              <input type="text" class="edit-input" [(ngModel)]="user.razonSocial" placeholder="Razón Social">
+            <input type="text" class="edit-input" [(ngModel)]="user.razonSocial" maxlength="80"
+              placeholder="Razón Social">
             } @else {
-              {{ user.rol === 'EMPRESA' ? (user.razonSocial || 'No asignada') : '-' }}
+            {{ user.rol === 'EMPRESA' ? (user.razonSocial || 'No asignada') : '-' }}
+            }
+          </td>
+          <td>
+            @if (user.isEditing && user.rol === 'EMPRESA') {
+            <input type="text" class="edit-input" [ngModel]="user.nombreContacto"
+              (ngModelChange)="user.nombreContacto = sanitizeLetras($event)" maxlength="80"
+              placeholder="Nombre de contacto">
+            } @else {
+            {{ user.rol === 'EMPRESA' ? (user.nombreContacto || 'No asignado') : '-' }}
             }
           </td>
           <td>
             @if (user.isEditing) {
-              <input type="text" class="edit-input" [(ngModel)]="user.nombreContacto">
+            <select class="edit-select" [(ngModel)]="user.estado">
+              <option value="ACTIVO">Activo</option>
+              <option value="PENDIENTE">Pendiente</option>
+              <option value="INACTIVO">Inactivo</option>
+            </select>
             } @else {
-              {{ user.nombreContacto }}
-            }
-          </td>
-          <td>
-            @if (user.isEditing) {
-              <select class="edit-select" [(ngModel)]="user.estado">
-                <option value="ACTIVO">Activo</option>
-                <option value="PENDIENTE">Pendiente</option>
-                <option value="INACTIVO">Inactivo</option>
-              </select>
-            } @else {
-              {{ user.estado }}
+            {{ user.estado }}
             }
           </td>
           <td>
             <div class="options-cell">
               @if (user.isEditing) {
-                <button class="btn-save" title="Guardar" (click)="guardarUsuario(user)"><i class="bi bi-check-lg"></i></button>
-                <button class="btn-cancel" title="Cancelar" (click)="cancelarEdicion(user)"><i class="bi bi-x-lg"></i></button>
+              <button class="btn-save" title="Guardar" (click)="guardarUsuario(user)"><i
+                  class="bi bi-check-lg"></i></button>
+              <button class="btn-cancel" title="Cancelar" (click)="cancelarEdicion(user)"><i
+                  class="bi bi-x-lg"></i></button>
               } @else {
-                <button class="btn-edit" title="Editar" (click)="editarUsuario(user)"><i class="bi bi-pencil"></i></button>
-                <button class="btn-delete" title="Borrar" (click)="eliminarUsuario(user)"><i class="bi bi-trash"></i></button>
+              <button class="btn-edit" title="Editar" (click)="editarUsuario(user)"><i
+                  class="bi bi-pencil"></i></button>
+              <button class="btn-delete" title="Borrar" (click)="eliminarUsuario(user)"><i
+                  class="bi bi-trash"></i></button>
               }
             </div>
           </td>
         </tr>
-      } @empty {
+        } @empty {
         <tr>
-          <td colspan="6" style="text-align: center;">No hay usuarios registrados.</td>
+          <td colspan="14" class="empty-row">No hay usuarios registrados.</td>
         </tr>
-      }
-    </tbody>
-  </table>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>

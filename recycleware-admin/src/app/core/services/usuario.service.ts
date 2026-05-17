@@ -21,4 +21,8 @@ export class UsuarioService {
   actualizarUsuario(id: number, usuario: any): Observable<any> {   
     return this.http.patch(`${this.apiUrl}/${id}`, usuario, { withCredentials: true });
   }
+
+  crearUsuario(usuario: any): Observable<any> {
+    return this.http.post(this.apiUrl, usuario, { withCredentials: true });
+  }
 }

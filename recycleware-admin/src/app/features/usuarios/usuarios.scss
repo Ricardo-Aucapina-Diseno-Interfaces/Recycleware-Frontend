@@ -25,6 +25,7 @@
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s ease;
+
   &:hover {
     background-color: rgba($secondary, 0.75);
   }
@@ -85,8 +86,9 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+
   &:hover {
-    background-color: rgba($primary, 0.2); 
+    background-color: rgba($primary, 0.2);
   }
 }
 
@@ -101,12 +103,14 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+
   &:hover {
-    background-color: rgba($danger, 0.65); 
+    background-color: rgba($danger, 0.65);
   }
 }
 
-.edit-input, .edit-select {
+.edit-input,
+.edit-select {
   background-color: $light;
   border: 1px solid rgba($primary, 0.3);
   color: $dark;
@@ -116,7 +120,7 @@
   width: 100%;
   outline: none;
   font-family: inherit;
-  
+
   &:focus {
     border-color: $secondary;
     box-shadow: 0 0 0 0.15rem rgba($secondary, 0.2);
@@ -125,15 +129,18 @@
 
 .btn-save {
   background-color: transparent;
-  color: $success; 
+  color: $success;
   border: 0.1rem solid $success;
   border-radius: 0.3rem;
   padding: 0.4rem 0.6rem;
   cursor: pointer;
   display: inline-flex;
   transition: all 0.2s ease;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    background-color: rgba($success, 0.15); 
+    background-color: rgba($success, 0.15);
   }
 }
 
@@ -146,7 +153,37 @@
   cursor: pointer;
   display: inline-flex;
   transition: all 0.2s ease;
+  align-items: center;
+  justify-content: center;
+
   &:hover {
-    background-color: rgba($danger, 0.15); 
+    background-color: rgba($danger, 0.15);
   }
+}
+
+.input-dni,
+.input-pwd,
+.input-tel {
+  width: 7rem;
+}
+
+.input-dir {
+  min-width: 10rem;
+}
+
+.input-loc {
+  width: 8rem;
+}
+
+.input-cp {
+  width: 5rem;
+}
+
+.pwd-mask {
+  letter-spacing: 2px;
+  color: gray;
+}
+
+.empty-row {
+  text-align: center;
 }
